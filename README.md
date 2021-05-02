@@ -10,7 +10,7 @@ at <https://libgdx.com/dev/setup/>.
 
 ### License
 
-Eternal Soda Can copyright 2021 Ashley Noel Hinton.
+Eternal Calendar copyright 2021 Ashley Noel Hinton.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
