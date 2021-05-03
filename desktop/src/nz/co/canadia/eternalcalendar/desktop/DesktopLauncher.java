@@ -13,6 +13,6 @@ public class DesktopLauncher {
 		config.setWindowedMode(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 		config.setResizable(false);
 
-		new Lwjgl3Application(new EternalCalendar(), config);
+		new Lwjgl3Application(new EternalCalendar(new DesktopFontLoader()), config);
 	}
 }

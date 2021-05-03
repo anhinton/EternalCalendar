@@ -22,16 +22,8 @@ public class MainScreen implements InputProcessor, Screen {
     public MainScreen(EternalCalendar game) {
         this.game = game;
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Podkova-VariableFont_wght.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.characters = Constants.FONT_CHARACTERS;
-        parameter.size = Constants.FONT_SIZE;
-        parameter.color = Constants.FONT_COLOR;
-        dateFont = generator.generateFont(parameter);
-
-        parameter.size = Constants.SMALL_FONT_SIZE;
-        smallDateFont = generator.generateFont(parameter);
-        generator.dispose();
+        dateFont = game.fontLoader.getDateFont(game.manager);
+        smallDateFont = game.fontLoader.getSmallDateFont(game.manager);
 
         // Parse date rows and columns from CSV file
         FileHandle file = Gdx.files.internal("data/dates.csv");
