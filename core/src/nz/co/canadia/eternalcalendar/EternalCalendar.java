@@ -1,10 +1,8 @@
 package nz.co.canadia.eternalcalendar;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 
 public class EternalCalendar extends Game {
 
@@ -26,14 +24,6 @@ public class EternalCalendar extends Game {
 		manager.finishLoading();
 
 		this.setScreen(new MainScreen(this));
-	}
-
-	public static int getDateFontSize() {
-		return MathUtils.round((float) Constants.DATE_FONT_SIZE / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
-	}
-
-	public static int getSmallDateFontSize() {
-		return MathUtils.round((float) Constants.SMALL_DATE_FONT_SIZE / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
 	}
 
 	@Override
