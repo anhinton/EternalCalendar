@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -14,17 +15,26 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MainScreen implements InputProcessor, Screen {
     private final EternalCalendar game;
     private final Viewport viewport;
-    private final BitmapFont font;
+    private final BitmapFont dateFont;
     private final String[][] dateArray;
+    private final BitmapFont smallDateFont;
 
     public MainScreen(EternalCalendar game) {
         this.game = game;
 
-        font = new BitmapFont();
-        font.setColor(0, 0, 0, 1);
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Podkova-VariableFont_wght.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.characters = Constants.FONT_CHARACTERS;
+        parameter.size = Constants.FONT_SIZE;
+        parameter.color = Constants.FONT_COLOR;
+        dateFont = generator.generateFont(parameter);
+
+        parameter.size = Constants.SMALL_FONT_SIZE;
+        smallDateFont = generator.generateFont(parameter);
+        generator.dispose();
 
         // Parse date rows and columns from CSV file
-        FileHandle file = Gdx.files.internal("dates.csv");
+        FileHandle file = Gdx.files.internal("data/dates.csv");
         String text = file.readString("UTF-8");
         String[] textArray = text.split("\\r?\\n");
         dateArray = new String[textArray.length][];
@@ -54,7 +64,11 @@ public class MainScreen implements InputProcessor, Screen {
         for (int i = 0; i < dateArray.length; i++) {
             String[] row = dateArray[i];
             for (int j = 0; j < row.length; j++) {
-                font.draw(game.batch, row[j], 100 + j * 40, 400 - i * 50);
+                if (i == 4 && (j == 0 || j == 1)) {
+                    smallDateFont.draw(game.batch, row[j], 100 + j * 40, 400 - i * 50);
+                } else {
+                    dateFont.draw(game.batch, row[j], 100 + j * 40, 400 - i * 50);
+                }
             }
         }
 
