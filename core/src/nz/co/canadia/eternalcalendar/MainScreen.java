@@ -6,9 +6,11 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -24,6 +26,7 @@ public class MainScreen implements InputProcessor, Screen {
 
         BitmapFont dateFont = game.fontLoader.getDateFont(game.manager);
         BitmapFont smallDateFont = game.fontLoader.getSmallDateFont(game.manager);
+        Texture backgroundTexture = game.manager.get("textures/background.jpg", Texture.class);
 
         // Parse date rows and columns from CSV file
         FileHandle file = Gdx.files.internal("data/dates.csv");
@@ -38,6 +41,11 @@ public class MainScreen implements InputProcessor, Screen {
         OrthographicCamera uiCamera = new OrthographicCamera(uiWidth, Gdx.graphics.getBackBufferHeight());
         Viewport uiViewport = new FitViewport(uiWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
         stage = new Stage(uiViewport);
+
+        Image backgroundImage = new Image(backgroundTexture);
+        backgroundImage.setSize(stage.getWidth(), stage.getHeight());
+        backgroundImage.setPosition(0, 0);
+        stage.addActor(backgroundImage);
 
         float datePadding = (float) Constants.DATE_PADDING / Constants.GAME_WIDTH * uiWidth;
         float dateColWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * uiWidth;
