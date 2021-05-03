@@ -2,7 +2,6 @@ package nz.co.canadia.eternalcalendar;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.math.MathUtils;
 
 public class Constants {
     public static final String GAME_NAME = "Eternal Calendar";
@@ -10,9 +9,12 @@ public class Constants {
 
     public static final int GAME_WIDTH = 640;
     public static final int GAME_HEIGHT = 480;
+    public static final float GAME_ASPECT_RATIO = 1.333f;
+
+    public static final int N_COLUMNS = 13;
 
     public static final String FONT_CHARACTERS = FreeTypeFontGenerator.DEFAULT_CHARS + "\u2022";
     public static final Color FONT_COLOR = Color.BLACK;
-    public static final int FONT_SIZE = 22;
-    public static final int SMALL_FONT_SIZE = 11;
+    public static final int DATE_FONT_SIZE = 22;
+    public static final int SMALL_DATE_FONT_SIZE = 11;
 }

@@ -28,7 +28,7 @@ public class AndroidFontLoader implements FontLoader {
         FreetypeFontLoader.FreeTypeFontLoaderParameter dateFont = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         dateFont.fontFileName = "fonts/Podkova-VariableFont_wght.ttf";
         dateFont.fontParameters.characters = Constants.FONT_CHARACTERS;
-        dateFont.fontParameters.size = Constants.FONT_SIZE;
+        dateFont.fontParameters.size = EternalCalendar.getDateFontSize();
         dateFont.fontParameters.color = Constants.FONT_COLOR;
         manager.load("fonts/Podkova-VariableFont_wghtDate.ttf", BitmapFont.class, dateFont);
     }
@@ -45,7 +45,7 @@ public class AndroidFontLoader implements FontLoader {
         FreetypeFontLoader.FreeTypeFontLoaderParameter smallDateFont = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         smallDateFont.fontFileName = "fonts/Podkova-VariableFont_wght.ttf";
         smallDateFont.fontParameters.characters = Constants.FONT_CHARACTERS;
-        smallDateFont.fontParameters.size = Constants.SMALL_FONT_SIZE;
+        smallDateFont.fontParameters.size = EternalCalendar.getSmallDateFontSize();
         smallDateFont.fontParameters.color = Constants.FONT_COLOR;
         manager.load("fonts/Podkova-VariableFont_wghtSmallDate.ttf", BitmapFont.class, smallDateFont);
     }

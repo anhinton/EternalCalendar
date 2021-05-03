@@ -7,17 +7,19 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainScreen implements InputProcessor, Screen {
     private final EternalCalendar game;
-    private final Viewport viewport;
+    private final Viewport uiViewport;
     private final BitmapFont dateFont;
     private final String[][] dateArray;
     private final BitmapFont smallDateFont;
+    private final int colWidth;
 
     public MainScreen(EternalCalendar game) {
         this.game = game;
@@ -34,8 +36,11 @@ public class MainScreen implements InputProcessor, Screen {
             dateArray[i] = textArray[i].split(",");
         }
 
-        OrthographicCamera camera = new OrthographicCamera(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
-        viewport = new FillViewport(Constants.GAME_WIDTH, Constants.GAME_HEIGHT, camera);
+        int uiWidth = MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.GAME_ASPECT_RATIO);
+        OrthographicCamera uiCamera = new OrthographicCamera(uiWidth, Gdx.graphics.getBackBufferHeight());
+        uiViewport = new FitViewport(uiWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
+
+        colWidth = uiWidth / (Constants.N_COLUMNS + 1);
 
         Gdx.input.setInputProcessor(this);
     }
@@ -49,7 +54,7 @@ public class MainScreen implements InputProcessor, Screen {
     public void render(float delta) {
         ScreenUtils.clear(Constants.BACKGROUND_COLOR);
 
-        game.batch.setProjectionMatrix(viewport.getCamera().combined);
+        game.batch.setProjectionMatrix(uiViewport.getCamera().combined);
 
         game.batch.begin();
 
@@ -57,9 +62,9 @@ public class MainScreen implements InputProcessor, Screen {
             String[] row = dateArray[i];
             for (int j = 0; j < row.length; j++) {
                 if (i == 4 && (j == 0 || j == 1)) {
-                    smallDateFont.draw(game.batch, row[j], 100 + j * 40, 400 - i * 50);
+                    smallDateFont.draw(game.batch, row[j], colWidth + j * colWidth, 400 - i * 50, 1, Align.center, false);
                 } else {
-                    dateFont.draw(game.batch, row[j], 100 + j * 40, 400 - i * 50);
+                    dateFont.draw(game.batch, row[j], colWidth + j * colWidth, 400 - i * 50, 1, Align.center, false);
                 }
             }
         }
@@ -69,7 +74,7 @@ public class MainScreen implements InputProcessor, Screen {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, true);
+        uiViewport.update(width, height, true);
     }
 
     @Override
