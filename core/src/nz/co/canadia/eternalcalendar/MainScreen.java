@@ -41,6 +41,7 @@ public class MainScreen implements InputProcessor, Screen {
 
         float datePadding = (float) Constants.DATE_PADDING / Constants.GAME_WIDTH * uiWidth;
         float dateColWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * uiWidth;
+        float firstColumnY = uiViewport.getScreenHeight() - datePadding - dateColWidth;
 
         Label.LabelStyle dateLabelStyle = new Label.LabelStyle(dateFont, Constants.FONT_COLOR);
         Label.LabelStyle smallDateLabelStyle = new Label.LabelStyle(smallDateFont, Constants.FONT_COLOR);
@@ -52,7 +53,7 @@ public class MainScreen implements InputProcessor, Screen {
                 } else {
                     l = new Label(dateArray[i][j], dateLabelStyle);
                 }
-                l.setPosition(datePadding + j * dateColWidth, 400 - i * 50, Align.center);
+                l.setPosition(datePadding + j * dateColWidth, firstColumnY - i * dateColWidth, Align.center);
                 stage.addActor(l);
             }
         }
