@@ -14,5 +14,5 @@ public class Constants {
     public static final String FONT_CHARACTERS = FreeTypeFontGenerator.DEFAULT_CHARS + "\u2022";
     public static final Color FONT_COLOR = Color.BLACK;
     public static final int FONT_SIZE = 22;
-    public static final int SMALL_FONT_SIZE = MathUtils.ceil(FONT_SIZE / 2f);
+    public static final int SMALL_FONT_SIZE = 11;
 }
