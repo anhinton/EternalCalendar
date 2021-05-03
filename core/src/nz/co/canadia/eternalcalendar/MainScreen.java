@@ -8,6 +8,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -15,32 +17,43 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainScreen implements InputProcessor, Screen {
     private final EternalCalendar game;
-    private final Viewport uiViewport;
-    private final BitmapFont dateFont;
-    private final String[][] dateArray;
-    private final BitmapFont smallDateFont;
-    private final int colWidth;
+    private final Stage stage;
 
     public MainScreen(EternalCalendar game) {
         this.game = game;
 
-        dateFont = game.fontLoader.getDateFont(game.manager);
-        smallDateFont = game.fontLoader.getSmallDateFont(game.manager);
+        BitmapFont dateFont = game.fontLoader.getDateFont(game.manager);
+        BitmapFont smallDateFont = game.fontLoader.getSmallDateFont(game.manager);
 
         // Parse date rows and columns from CSV file
         FileHandle file = Gdx.files.internal("data/dates.csv");
         String text = file.readString("UTF-8");
         String[] textArray = text.split("\\r?\\n");
-        dateArray = new String[textArray.length][];
+        String[][] dateArray = new String[textArray.length][];
         for (int i = 0; i < textArray.length; i++) {
             dateArray[i] = textArray[i].split(",");
         }
 
         int uiWidth = MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.GAME_ASPECT_RATIO);
         OrthographicCamera uiCamera = new OrthographicCamera(uiWidth, Gdx.graphics.getBackBufferHeight());
-        uiViewport = new FitViewport(uiWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
+        Viewport uiViewport = new FitViewport(uiWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
+        stage = new Stage(uiViewport);
 
-        colWidth = uiWidth / (Constants.N_COLUMNS + 1);
+        int colWidth = uiWidth / (Constants.N_COLUMNS + 1);
+        Label.LabelStyle dateLabelStyle = new Label.LabelStyle(dateFont, Constants.FONT_COLOR);
+        Label.LabelStyle smallDateLabelStyle = new Label.LabelStyle(smallDateFont, Constants.FONT_COLOR);
+        for (int i = 0; i < dateArray.length; i++) {
+            for (int j = 0; j < dateArray[i].length; j++) {
+                Label l;
+                if (i == 4 && j < 2) {
+                    l = new Label(dateArray[i][j], smallDateLabelStyle);
+                } else {
+                    l = new Label(dateArray[i][j], dateLabelStyle);
+                }
+                l.setPosition(colWidth + j * colWidth, 400 - i * 50, Align.center);
+                stage.addActor(l);
+            }
+        }
 
         Gdx.input.setInputProcessor(this);
     }
@@ -54,27 +67,17 @@ public class MainScreen implements InputProcessor, Screen {
     public void render(float delta) {
         ScreenUtils.clear(Constants.BACKGROUND_COLOR);
 
-        game.batch.setProjectionMatrix(uiViewport.getCamera().combined);
+        stage.act(delta);
+        stage.draw();
 
+        game.batch.setProjectionMatrix(stage.getViewport().getCamera().combined);
         game.batch.begin();
-
-        for (int i = 0; i < dateArray.length; i++) {
-            String[] row = dateArray[i];
-            for (int j = 0; j < row.length; j++) {
-                if (i == 4 && (j == 0 || j == 1)) {
-                    smallDateFont.draw(game.batch, row[j], colWidth + j * colWidth, 400 - i * 50, 1, Align.center, false);
-                } else {
-                    dateFont.draw(game.batch, row[j], colWidth + j * colWidth, 400 - i * 50, 1, Align.center, false);
-                }
-            }
-        }
-
         game.batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
-        uiViewport.update(width, height, true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
