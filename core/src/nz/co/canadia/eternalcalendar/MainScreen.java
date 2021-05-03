@@ -6,11 +6,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainScreen implements Screen {
     private final EternalCalendar game;
-    private final Texture img;
 
     public MainScreen(EternalCalendar game) {
         this.game = game;
-        img = new Texture("badlogic.jpg");
     }
 
     @Override
@@ -20,9 +18,8 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(1, 0, 0, 1);
+        ScreenUtils.clear(.9f, .9f, .9f, 1);
         game.batch.begin();
-        game.batch.draw(img, 0, 0);
         game.batch.end();
     }
 
@@ -48,6 +45,5 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-        img.dispose();
     }
 }
