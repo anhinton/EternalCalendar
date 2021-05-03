@@ -18,7 +18,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(.9f, .9f, .9f, 1);
+        ScreenUtils.clear(Constants.BACKGROUND_COLOR);
         game.batch.begin();
         game.batch.end();
     }
