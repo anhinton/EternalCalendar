@@ -39,7 +39,9 @@ public class MainScreen implements InputProcessor, Screen {
         Viewport uiViewport = new FitViewport(uiWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
         stage = new Stage(uiViewport);
 
-        int colWidth = uiWidth / (Constants.N_COLUMNS + 1);
+        float datePadding = (float) Constants.DATE_PADDING / Constants.GAME_WIDTH * uiWidth;
+        float dateColWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * uiWidth;
+
         Label.LabelStyle dateLabelStyle = new Label.LabelStyle(dateFont, Constants.FONT_COLOR);
         Label.LabelStyle smallDateLabelStyle = new Label.LabelStyle(smallDateFont, Constants.FONT_COLOR);
         for (int i = 0; i < dateArray.length; i++) {
@@ -50,7 +52,7 @@ public class MainScreen implements InputProcessor, Screen {
                 } else {
                     l = new Label(dateArray[i][j], dateLabelStyle);
                 }
-                l.setPosition(colWidth + j * colWidth, 400 - i * 50, Align.center);
+                l.setPosition(datePadding + j * dateColWidth, 400 - i * 50, Align.center);
                 stage.addActor(l);
             }
         }
