@@ -25,4 +25,14 @@ public class HtmlFontLoader implements FontLoader {
     public BitmapFont getSmallDateFont(AssetManager manager) {
         return manager.get("fonts/Podkova11.fnt", BitmapFont.class);
     }
+
+    @Override
+    public void loadWeekdayFont(AssetManager manager) {
+        manager.load("fonts/Inconsolata22.fnt", BitmapFont.class);
+    }
+
+    @Override
+    public BitmapFont getWeekdayFont(AssetManager manager) {
+        return manager.get("fonts/Inconsolata22.fnt", BitmapFont.class);
+    }
 }

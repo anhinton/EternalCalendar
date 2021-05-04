@@ -56,4 +56,21 @@ public class IOSFontLoader implements FontLoader {
     public BitmapFont getSmallDateFont(AssetManager manager) {
         return manager.get("fonts/Podkova-VariableFont_wghtSmallDate.ttf", BitmapFont.class);
     }
+
+    @Override
+    public void loadWeekdayFont(AssetManager manager) {
+        setLoader(manager);
+
+        FreetypeFontLoader.FreeTypeFontLoaderParameter weekdayFont = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        weekdayFont.fontFileName = "fonts/Inconsolata-VariableFont_wdth,wght.ttf";
+        weekdayFont.fontParameters.characters = Constants.FONT_CHARACTERS;
+        weekdayFont.fontParameters.size = MathUtils.round((float) Constants.WEEKDAY_FONT_SIZE / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
+        weekdayFont.fontParameters.color = Constants.FONT_COLOR;
+        manager.load("fonts/Inconsolata-VariableFont_wdth,wghtWeekday.ttf", BitmapFont.class, weekdayFont);
+    }
+
+    @Override
+    public BitmapFont getWeekdayFont(AssetManager manager) {
+        return manager.get("fonts/Inconsolata-VariableFont_wdth,wghtWeekday.ttf", BitmapFont.class);
+    }
 }

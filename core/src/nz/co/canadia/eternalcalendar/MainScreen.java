@@ -26,13 +26,13 @@ public class MainScreen implements InputProcessor, Screen {
 
         BitmapFont dateFont = game.fontLoader.getDateFont(game.manager);
         BitmapFont smallDateFont = game.fontLoader.getSmallDateFont(game.manager);
+        BitmapFont weekdayFont = game.fontLoader.getWeekdayFont(game.manager);
         Texture backgroundTexture = game.manager.get("textures/background.jpg", Texture.class);
         Texture sliderTexture = game.manager.get("textures/slider.png", Texture.class);
 
         // Parse date rows and columns from CSV file
         FileHandle file = Gdx.files.internal("data/dates.csv");
-        String text = file.readString("UTF-8");
-        String[] textArray = text.split("\\r?\\n");
+        String[] textArray = file.readString("UTF-8").split("\\r?\\n");
         String[][] dateArray = new String[textArray.length][];
         for (int i = 0; i < textArray.length; i++) {
             dateArray[i] = textArray[i].split(",");
@@ -71,8 +71,17 @@ public class MainScreen implements InputProcessor, Screen {
         float sliderHeight = (float) Constants.SLIDER_HEIGHT / Constants.GAME_HEIGHT * stage.getHeight();
         Image sliderImage = new Image(sliderTexture);
         sliderImage.setSize(sliderWidth, sliderHeight);
-        sliderImage.setPosition(270f / Constants.GAME_WIDTH * uiWidth, stage.getHeight() - sliderHeight);
+        sliderImage.setPosition(0f / Constants.GAME_WIDTH * uiWidth, stage.getHeight() - sliderHeight);
         stage.addActor(sliderImage);
+
+        Label.LabelStyle weekdayLabelStyle = new Label.LabelStyle(weekdayFont, Constants.FONT_COLOR);
+        String[] weekdayArray = game.bundle.get("weekdays").split(",");
+        for (int i = 0; i < weekdayArray.length; i++) {
+            Label dayLabel = new Label(weekdayArray[i], weekdayLabelStyle);
+            dayLabel.setPosition(datePadding + i * dateColWidth, uiViewport.getScreenHeight() - datePadding, Align.center);
+            stage.addActor(dayLabel);
+        }
+
 
         Gdx.input.setInputProcessor(this);
     }
@@ -120,8 +129,11 @@ public class MainScreen implements InputProcessor, Screen {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.ESCAPE) {
-            Gdx.app.exit();
+        switch (keycode) {
+            case Input.Keys.ESCAPE:
+            case Input.Keys.BACK:
+                Gdx.app.exit();
+                break;
         }
         return true;
     }

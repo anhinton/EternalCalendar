@@ -21,4 +21,5 @@ public class Constants {
     public static final Color FONT_COLOR = Color.BLACK;
     public static final int DATE_FONT_SIZE = 22;
     public static final int SMALL_DATE_FONT_SIZE = 11;
+    public static final int WEEKDAY_FONT_SIZE = 22;
 }
