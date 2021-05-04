@@ -11,10 +11,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -31,6 +34,7 @@ public class MainScreen implements InputProcessor, Screen {
 
         Texture backgroundTexture = game.manager.get("textures/background.jpg", Texture.class);
         Texture sliderTexture = game.manager.get("textures/slider.png", Texture.class);
+        Texture infoButtonTexture = game.manager.get("textures/info_icon.png", Texture.class);
 
         // Parse date rows and columns from CSV file
         FileHandle file = Gdx.files.internal("data/dates.csv");
@@ -82,11 +86,21 @@ public class MainScreen implements InputProcessor, Screen {
         }
 
         final String[] months = game.bundle.get("months").split(",");
-
         curMonth = 0;
         float buttonPadding = (float) Constants.BUTTON_PADDING / Constants.GAME_HEIGHT * stage.getHeight();
         float monthButtonWidth = (float) Constants.MONTH_BUTTON_WIDTH / Constants.GAME_HEIGHT * stage.getWidth();
         float buttonHeight = (float) Constants.BUTTON_HEIGHT / Constants.GAME_HEIGHT * stage.getHeight();
+
+        ImageButton.ImageButtonStyle infoButtonStyle = new ImageButton.ImageButtonStyle(game.skin.get("default", Button.ButtonStyle.class));
+        TextureRegionDrawable infoIconDrawable = new TextureRegionDrawable(game.manager.get("textures/info_icon.png", Texture.class));
+        // TODO: Resolve info icon size on mobile screens; work out if button colours really are different
+        infoIconDrawable.setMinSize(30, 30);
+        infoButtonStyle.imageUp = infoIconDrawable;
+        ImageButton infoButton = new ImageButton(infoButtonStyle);
+        infoButton.setSize(buttonHeight, buttonHeight);
+        infoButton.setPosition(buttonPadding, buttonPadding);
+        stage.addActor(infoButton);
+
         monthButton = new TextButton(months[curMonth], game.skin, "month");
         monthButton.setPosition(stage.getWidth() - buttonPadding - monthButtonWidth,
                 buttonPadding);
@@ -98,10 +112,9 @@ public class MainScreen implements InputProcessor, Screen {
                 monthButton.setText(months[curMonth]);
             }
         });
-
         stage.addActor(monthButton);
 
-        InputMultiplexer multiplexer = new InputMultiplexer();
+                InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);

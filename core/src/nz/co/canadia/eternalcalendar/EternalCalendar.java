@@ -38,6 +38,7 @@ public class EternalCalendar extends Game {
 		// TODO: Load these on a loading screen
 		manager.load("textures/background.jpg", Texture.class);
 		manager.load("textures/slider.png", Texture.class);
+		manager.load("textures/info_icon.png", Texture.class);
 		manager.load("i18n/Bundle", I18NBundle.class);
 		manager.load("skin/uiskin.json", Skin.class);
 		manager.finishLoading();
