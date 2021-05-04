@@ -23,6 +23,7 @@ public class EternalCalendar extends Game {
 		fontLoader.loadDateFont(manager);
 		fontLoader.loadSmallDateFont(manager);
 		manager.load("textures/background.jpg", Texture.class);
+		manager.load("textures/slider.png", Texture.class);
 		manager.finishLoading();
 
 		this.setScreen(new MainScreen(this));

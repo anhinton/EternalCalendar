@@ -5,11 +5,14 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class Constants {
     public static final String GAME_NAME = "Eternal Calendar";
-    public static final Color BACKGROUND_COLOR = new Color(.9f, .9f, .9f, 1);
+    public static final Color BACKGROUND_COLOR = new Color(0,0,0, 1);
 
     public static final int GAME_WIDTH = 640;
     public static final int GAME_HEIGHT = 480;
     public static final float GAME_ASPECT_RATIO = 1.333f;
+
+    public static final int SLIDER_WIDTH = 370;
+    public static final int SLIDER_HEIGHT = 320;
 
     public static final int DATE_PADDING = 50;
     public static final int DATE_COLUMN_WIDTH = 45;

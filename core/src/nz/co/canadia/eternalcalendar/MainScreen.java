@@ -27,6 +27,7 @@ public class MainScreen implements InputProcessor, Screen {
         BitmapFont dateFont = game.fontLoader.getDateFont(game.manager);
         BitmapFont smallDateFont = game.fontLoader.getSmallDateFont(game.manager);
         Texture backgroundTexture = game.manager.get("textures/background.jpg", Texture.class);
+        Texture sliderTexture = game.manager.get("textures/slider.png", Texture.class);
 
         // Parse date rows and columns from CSV file
         FileHandle file = Gdx.files.internal("data/dates.csv");
@@ -65,6 +66,13 @@ public class MainScreen implements InputProcessor, Screen {
                 stage.addActor(l);
             }
         }
+
+        float sliderWidth = (float) Constants.SLIDER_WIDTH / Constants.GAME_WIDTH * stage.getWidth();
+        float sliderHeight = (float) Constants.SLIDER_HEIGHT / Constants.GAME_HEIGHT * stage.getHeight();
+        Image sliderImage = new Image(sliderTexture);
+        sliderImage.setSize(sliderWidth, sliderHeight);
+        sliderImage.setPosition(270f / Constants.GAME_WIDTH * uiWidth, stage.getHeight() - sliderHeight);
+        stage.addActor(sliderImage);
 
         Gdx.input.setInputProcessor(this);
     }
