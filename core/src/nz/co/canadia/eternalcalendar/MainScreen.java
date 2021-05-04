@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -24,9 +23,6 @@ public class MainScreen implements InputProcessor, Screen {
     public MainScreen(EternalCalendar game) {
         this.game = game;
 
-        BitmapFont dateFont = game.fontLoader.getDateFont(game.manager);
-        BitmapFont smallDateFont = game.fontLoader.getSmallDateFont(game.manager);
-        BitmapFont weekdayFont = game.fontLoader.getWeekdayFont(game.manager);
         Texture backgroundTexture = game.manager.get("textures/background.jpg", Texture.class);
         Texture sliderTexture = game.manager.get("textures/slider.png", Texture.class);
 
@@ -52,15 +48,13 @@ public class MainScreen implements InputProcessor, Screen {
         float dateColWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * uiWidth;
         float firstColumnY = uiViewport.getScreenHeight() - datePadding - dateColWidth;
 
-        Label.LabelStyle dateLabelStyle = new Label.LabelStyle(dateFont, Constants.FONT_COLOR);
-        Label.LabelStyle smallDateLabelStyle = new Label.LabelStyle(smallDateFont, Constants.FONT_COLOR);
         for (int i = 0; i < dateArray.length; i++) {
             for (int j = 0; j < dateArray[i].length; j++) {
                 Label l;
                 if (i == 4 && j < 2) {
-                    l = new Label(dateArray[i][j], smallDateLabelStyle);
+                    l = new Label(dateArray[i][j], game.skin.get("smallDate", Label.LabelStyle.class));
                 } else {
-                    l = new Label(dateArray[i][j], dateLabelStyle);
+                    l = new Label(dateArray[i][j], game.skin.get("date", Label.LabelStyle.class));
                 }
                 l.setPosition(datePadding + j * dateColWidth, firstColumnY - i * dateColWidth, Align.center);
                 stage.addActor(l);
@@ -74,13 +68,13 @@ public class MainScreen implements InputProcessor, Screen {
         sliderImage.setPosition(0f / Constants.GAME_WIDTH * uiWidth, stage.getHeight() - sliderHeight);
         stage.addActor(sliderImage);
 
-        Label.LabelStyle weekdayLabelStyle = new Label.LabelStyle(weekdayFont, Constants.FONT_COLOR);
         String[] weekdayArray = game.bundle.get("weekdays").split(",");
         for (int i = 0; i < weekdayArray.length; i++) {
-            Label dayLabel = new Label(weekdayArray[i], weekdayLabelStyle);
+            Label dayLabel = new Label(weekdayArray[i], game.skin.get("weekday", Label.LabelStyle.class));
             dayLabel.setPosition(datePadding + i * dateColWidth, uiViewport.getScreenHeight() - datePadding, Align.center);
             stage.addActor(dayLabel);
         }
+
 
 
         Gdx.input.setInputProcessor(this);
