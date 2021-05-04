@@ -84,9 +84,13 @@ public class MainScreen implements InputProcessor, Screen {
         final String[] months = game.bundle.get("months").split(",");
 
         curMonth = 0;
-        monthButton = new TextButton(months[curMonth], game.skin, "default");
-        monthButton.setPosition(100, 100);
-
+        float buttonPadding = (float) Constants.BUTTON_PADDING / Constants.GAME_HEIGHT * stage.getHeight();
+        float monthButtonWidth = (float) Constants.MONTH_BUTTON_WIDTH / Constants.GAME_HEIGHT * stage.getWidth();
+        float buttonHeight = (float) Constants.BUTTON_HEIGHT / Constants.GAME_HEIGHT * stage.getHeight();
+        monthButton = new TextButton(months[curMonth], game.skin, "month");
+        monthButton.setPosition(stage.getWidth() - buttonPadding - monthButtonWidth,
+                buttonPadding);
+        monthButton.setSize(monthButtonWidth, buttonHeight);
         monthButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

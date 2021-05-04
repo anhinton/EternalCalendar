@@ -16,10 +16,14 @@ public class Constants {
 
     public static final int DATE_PADDING = 50;
     public static final int DATE_COLUMN_WIDTH = 45;
+    public static final int BUTTON_PADDING = 25;
 
     public static final String FONT_CHARACTERS = FreeTypeFontGenerator.DEFAULT_CHARS + "\u2022";
     public static final Color FONT_COLOR = Color.BLACK;
     public static final int DATE_FONT_SIZE = 22;
     public static final int SMALL_DATE_FONT_SIZE = 11;
     public static final int WEEKDAY_FONT_SIZE = 22;
+
+    public static final int MONTH_BUTTON_WIDTH = 120;
+    public static final int BUTTON_HEIGHT = 40;
 }
