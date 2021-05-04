@@ -2,15 +2,19 @@ package nz.co.canadia.eternalcalendar;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -19,6 +23,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MainScreen implements InputProcessor, Screen {
     private final EternalCalendar game;
     private final Stage stage;
+    private int curMonth;
+    private final TextButton monthButton;
 
     public MainScreen(EternalCalendar game) {
         this.game = game;
@@ -75,9 +81,26 @@ public class MainScreen implements InputProcessor, Screen {
             stage.addActor(dayLabel);
         }
 
+        final String[] months = game.bundle.get("months").split(",");
 
+        curMonth = 0;
+        monthButton = new TextButton(months[curMonth], game.skin, "default");
+        monthButton.setPosition(100, 100);
 
-        Gdx.input.setInputProcessor(this);
+        monthButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                curMonth = (curMonth + 1) % 12;
+                monthButton.setText(months[curMonth]);
+            }
+        });
+
+        stage.addActor(monthButton);
+
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(this);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
