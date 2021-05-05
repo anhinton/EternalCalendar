@@ -35,6 +35,8 @@ public class Slider extends Group {
             dayLabel.setPosition(padding + i * colWidth, gameHeight - padding, Align.center);
             super.addActor(dayLabel);
         }
+
+        setX(column * colWidth);
     }
 
     @Override
