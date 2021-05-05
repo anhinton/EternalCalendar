@@ -10,14 +10,17 @@ import com.badlogic.gdx.utils.Align;
 public class Slider extends Group {
     private final float gameWidth;
     private final float sliderWidth;
+    private final float colWidth;
+    private int column;
 
-    public Slider(EternalCalendar game, TextureAtlas atlas, float gameWidth, float gameHeight) {
+    public Slider(EternalCalendar game, TextureAtlas atlas, float gameWidth, float gameHeight, int column) {
         this.gameWidth = gameWidth;
+        this.column = column;
 
         sliderWidth = (float) Constants.SLIDER_WIDTH / Constants.GAME_WIDTH * gameWidth;
-        final float sliderHeight = (float) Constants.SLIDER_HEIGHT / Constants.GAME_HEIGHT * gameHeight;
+        float sliderHeight = (float) Constants.SLIDER_HEIGHT / Constants.GAME_HEIGHT * gameHeight;
         float padding = (float) Constants.DATE_PADDING / Constants.GAME_WIDTH * gameWidth;
-        float colWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * gameWidth;
+        colWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * gameWidth;
 
         // Slider panel
         final Image sliderImage = new Image(atlas.findRegion("slider"));
@@ -41,6 +44,7 @@ public class Slider extends Group {
     }
 
     public void snap(float x) {
-
+        column = MathUtils.round (x / colWidth);
+        setX(column * colWidth);
     }
 }

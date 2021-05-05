@@ -73,7 +73,7 @@ public class MainScreen implements InputProcessor, Screen {
         }
 
         // Create Slider
-        final Slider slider = new Slider(game, atlas, gameWidth, gameHeight);
+        final Slider slider = new Slider(game, atlas, gameWidth, gameHeight, Constants.DEFAULT_SLIDER_COLUMN);
         slider.addListener(new ActorGestureListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
