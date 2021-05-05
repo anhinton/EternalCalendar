@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
@@ -13,14 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -39,41 +35,15 @@ public class MainScreen implements InputProcessor, Screen {
 
         TextureAtlas atlas = game.manager.get("textures/textures.atlas", TextureAtlas.class);
 
-        // Parse date rows and columns from CSV file
-        FileHandle file = Gdx.files.internal("data/dates.csv");
-        String[] textArray = file.readString("UTF-8").split("\\r?\\n");
-        String[][] dateArray = new String[textArray.length][];
-        for (int i = 0; i < textArray.length; i++) {
-            dateArray[i] = textArray[i].split(",");
-        }
-
         int gameWidth = MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.GAME_ASPECT_RATIO);
         int gameHeight = Gdx.graphics.getBackBufferHeight();
         OrthographicCamera uiCamera = new OrthographicCamera(gameWidth, Gdx.graphics.getBackBufferHeight());
         Viewport uiViewport = new FitViewport(gameWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
         stage = new Stage(uiViewport);
 
-        Image backgroundImage = new Image(atlas.findRegion("background"));
-        backgroundImage.setSize(stage.getWidth(), stage.getHeight());
-        backgroundImage.setPosition(0, 0);
-        stage.addActor(backgroundImage);
-
-        float datePadding = (float) Constants.DATE_PADDING / Constants.GAME_WIDTH * gameWidth;
-        float dateColWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * gameWidth;
-        float firstColumnY = uiViewport.getScreenHeight() - datePadding - dateColWidth;
-
-        for (int i = 0; i < dateArray.length; i++) {
-            for (int j = 0; j < dateArray[i].length; j++) {
-                Label l;
-                if (i == 4 && j < 2) {
-                    l = new Label(dateArray[i][j], game.skin.get("smallDate", Label.LabelStyle.class));
-                } else {
-                    l = new Label(dateArray[i][j], game.skin.get("date", Label.LabelStyle.class));
-                }
-                l.setPosition(datePadding + j * dateColWidth, firstColumnY - i * dateColWidth, Align.center);
-                stage.addActor(l);
-            }
-        }
+        // Create background
+        Background background = new Background(atlas, game.skin, gameWidth, gameHeight);
+        stage.addActor(background);
 
         // Create Slider
         slider = new Slider(game, atlas, gameWidth, gameHeight, Constants.DEFAULT_SLIDER_COLUMN);
@@ -118,7 +88,7 @@ public class MainScreen implements InputProcessor, Screen {
         });
         stage.addActor(monthButton);
 
-                InputMultiplexer multiplexer = new InputMultiplexer();
+        InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
