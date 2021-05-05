@@ -35,6 +35,7 @@ public class MainScreen implements InputProcessor, Screen {
         Texture backgroundTexture = game.manager.get("textures/background.jpg", Texture.class);
         Texture sliderTexture = game.manager.get("textures/slider.png", Texture.class);
         Texture infoButtonTexture = game.manager.get("textures/info_icon.png", Texture.class);
+        infoButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         // Parse date rows and columns from CSV file
         FileHandle file = Gdx.files.internal("data/dates.csv");
@@ -89,22 +90,22 @@ public class MainScreen implements InputProcessor, Screen {
         curMonth = 0;
         float buttonPadding = (float) Constants.BUTTON_PADDING / Constants.GAME_HEIGHT * stage.getHeight();
         float monthButtonWidth = (float) Constants.MONTH_BUTTON_WIDTH / Constants.GAME_HEIGHT * stage.getWidth();
-        float buttonHeight = (float) Constants.BUTTON_HEIGHT / Constants.GAME_HEIGHT * stage.getHeight();
+        float buttonSize = (float) Constants.BUTTON_SIZE / Constants.GAME_HEIGHT * stage.getHeight();
+        float infoIconSize = (float) Constants.INFO_ICON_SIZE / Constants.GAME_HEIGHT * stage.getHeight();
 
         ImageButton.ImageButtonStyle infoButtonStyle = new ImageButton.ImageButtonStyle(game.skin.get("default", Button.ButtonStyle.class));
-        TextureRegionDrawable infoIconDrawable = new TextureRegionDrawable(game.manager.get("textures/info_icon.png", Texture.class));
-        // TODO: Resolve info icon size on mobile screens; work out if button colours really are different
-        infoIconDrawable.setMinSize(30, 30);
+        TextureRegionDrawable infoIconDrawable = new TextureRegionDrawable(infoButtonTexture);
+        infoIconDrawable.setMinSize(infoIconSize, infoIconSize);
         infoButtonStyle.imageUp = infoIconDrawable;
         ImageButton infoButton = new ImageButton(infoButtonStyle);
-        infoButton.setSize(buttonHeight, buttonHeight);
+        infoButton.setSize(buttonSize, buttonSize);
         infoButton.setPosition(buttonPadding, buttonPadding);
         stage.addActor(infoButton);
 
         monthButton = new TextButton(months[curMonth], game.skin, "month");
         monthButton.setPosition(stage.getWidth() - buttonPadding - monthButtonWidth,
                 buttonPadding);
-        monthButton.setSize(monthButtonWidth, buttonHeight);
+        monthButton.setSize(monthButtonWidth, buttonSize);
         monthButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
