@@ -49,4 +49,18 @@ public class Slider extends Group {
         column = MathUtils.round (x / colWidth);
         setX(column * colWidth);
     }
+
+    public void moveLeft() {
+        column--;
+        move();
+    }
+
+    public void moveRight() {
+        column++;
+        move();
+    }
+    private void move() {
+        column = MathUtils.clamp(column, Constants.SLIDER_COLUMN_MIN, Constants.SLIDER_COLIMN_MAX);
+        setX(column * colWidth);
+    }
 }

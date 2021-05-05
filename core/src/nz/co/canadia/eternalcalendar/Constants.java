@@ -29,4 +29,6 @@ public class Constants {
     public static final int INFO_ICON_SIZE = 30;
 
     public static final int DEFAULT_SLIDER_COLUMN = 0;
+    public static final int SLIDER_COLUMN_MIN = 0;
+    public static final int SLIDER_COLIMN_MAX = 6;
 }

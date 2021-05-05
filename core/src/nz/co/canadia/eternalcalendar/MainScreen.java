@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MainScreen implements InputProcessor, Screen {
     private final EternalCalendar game;
     private final Stage stage;
+    private final Slider slider;
     private int curMonth;
     private final TextButton monthButton;
 
@@ -73,7 +74,7 @@ public class MainScreen implements InputProcessor, Screen {
         }
 
         // Create Slider
-        final Slider slider = new Slider(game, atlas, gameWidth, gameHeight, Constants.DEFAULT_SLIDER_COLUMN);
+        slider = new Slider(game, atlas, gameWidth, gameHeight, Constants.DEFAULT_SLIDER_COLUMN);
         slider.addListener(new ActorGestureListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -169,6 +170,17 @@ public class MainScreen implements InputProcessor, Screen {
             case Input.Keys.ESCAPE:
             case Input.Keys.BACK:
                 Gdx.app.exit();
+                break;
+            // Slider Movement
+            case Input.Keys.LEFT:
+                slider.moveLeft();
+                break;
+            case Input.Keys.RIGHT:
+                slider.moveRight();
+                break;
+            // Change month
+            case Input.Keys.M:
+//                monthButton
                 break;
         }
         return true;
