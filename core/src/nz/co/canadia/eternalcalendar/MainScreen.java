@@ -163,7 +163,9 @@ public class MainScreen implements InputProcessor, Screen {
                 break;
             // Change month
             case Input.Keys.M:
-                changeMonth();
+                InputEvent e = new InputEvent();
+                e.setType(InputEvent.Type.touchDown);
+                monthButton.fire(e);
                 break;
         }
         return true;
@@ -171,6 +173,11 @@ public class MainScreen implements InputProcessor, Screen {
 
     @Override
     public boolean keyUp(int keycode) {
+        if (keycode == Input.Keys.M) {
+            InputEvent e = new InputEvent();
+            e.setType(InputEvent.Type.touchUp);
+            monthButton.fire(e);
+        }
         return false;
     }
 
