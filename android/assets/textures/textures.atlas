@@ -1,0 +1,27 @@
+
+textures.png
+size: 1024, 512
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+background
+  rotate: false
+  xy: 2, 2
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+info_icon
+  rotate: false
+  xy: 644, 130
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+slider
+  rotate: false
+  xy: 644, 162
+  size: 370, 320
+  orig: 370, 320
+  offset: 0, 0
+  index: -1

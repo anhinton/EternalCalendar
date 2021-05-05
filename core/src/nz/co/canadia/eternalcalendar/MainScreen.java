@@ -7,7 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -32,10 +32,7 @@ public class MainScreen implements InputProcessor, Screen {
     public MainScreen(EternalCalendar game) {
         this.game = game;
 
-        Texture backgroundTexture = game.manager.get("textures/background.jpg", Texture.class);
-        Texture sliderTexture = game.manager.get("textures/slider.png", Texture.class);
-        Texture infoButtonTexture = game.manager.get("textures/info_icon.png", Texture.class);
-        infoButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        TextureAtlas atlas = game.manager.get("textures/textures.atlas", TextureAtlas.class);
 
         // Parse date rows and columns from CSV file
         FileHandle file = Gdx.files.internal("data/dates.csv");
@@ -50,7 +47,7 @@ public class MainScreen implements InputProcessor, Screen {
         Viewport uiViewport = new FitViewport(uiWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
         stage = new Stage(uiViewport);
 
-        Image backgroundImage = new Image(backgroundTexture);
+        Image backgroundImage = new Image(atlas.findRegion("background"));
         backgroundImage.setSize(stage.getWidth(), stage.getHeight());
         backgroundImage.setPosition(0, 0);
         stage.addActor(backgroundImage);
@@ -74,7 +71,7 @@ public class MainScreen implements InputProcessor, Screen {
 
         float sliderWidth = (float) Constants.SLIDER_WIDTH / Constants.GAME_WIDTH * stage.getWidth();
         float sliderHeight = (float) Constants.SLIDER_HEIGHT / Constants.GAME_HEIGHT * stage.getHeight();
-        Image sliderImage = new Image(sliderTexture);
+        Image sliderImage = new Image(atlas.findRegion("slider"));
         sliderImage.setSize(sliderWidth, sliderHeight);
         sliderImage.setPosition(0f / Constants.GAME_WIDTH * uiWidth, stage.getHeight() - sliderHeight);
         stage.addActor(sliderImage);
@@ -94,7 +91,7 @@ public class MainScreen implements InputProcessor, Screen {
         float infoIconSize = (float) Constants.INFO_ICON_SIZE / Constants.GAME_HEIGHT * stage.getHeight();
 
         ImageButton.ImageButtonStyle infoButtonStyle = new ImageButton.ImageButtonStyle(game.skin.get("default", Button.ButtonStyle.class));
-        TextureRegionDrawable infoIconDrawable = new TextureRegionDrawable(infoButtonTexture);
+        TextureRegionDrawable infoIconDrawable = new TextureRegionDrawable(atlas.findRegion("info_icon"));
         infoIconDrawable.setMinSize(infoIconSize, infoIconSize);
         infoButtonStyle.imageUp = infoIconDrawable;
         ImageButton infoButton = new ImageButton(infoButtonStyle);

@@ -4,8 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -31,16 +33,16 @@ public class EternalCalendar extends Game {
 
 		// Load assets
 		manager = new AssetManager();
+		// Required in this class
+		manager.load("i18n/Bundle", I18NBundle.class);
+		manager.load("skin/uiskin.json", Skin.class);
 		fontLoader.loadDateFont(manager);
 		fontLoader.loadSmallDateFont(manager);
 		fontLoader.loadWeekdayFont(manager);
 		// Textures etc
 		// TODO: Load these on a loading screen
-		manager.load("textures/background.jpg", Texture.class);
-		manager.load("textures/slider.png", Texture.class);
-		manager.load("textures/info_icon.png", Texture.class);
-		manager.load("i18n/Bundle", I18NBundle.class);
-		manager.load("skin/uiskin.json", Skin.class);
+		manager.load("textures/textures.atlas", TextureAtlas.class);
+		TextureLoader.TextureParameter param = new TextureLoader.TextureParameter();
 		manager.finishLoading();
 
 		// Prepare Skin
