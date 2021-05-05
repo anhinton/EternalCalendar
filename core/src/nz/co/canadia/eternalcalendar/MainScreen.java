@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -45,9 +44,10 @@ public class MainScreen implements InputProcessor, Screen {
             dateArray[i] = textArray[i].split(",");
         }
 
-        int uiWidth = MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.GAME_ASPECT_RATIO);
-        OrthographicCamera uiCamera = new OrthographicCamera(uiWidth, Gdx.graphics.getBackBufferHeight());
-        Viewport uiViewport = new FitViewport(uiWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
+        int gameWidth = MathUtils.round(Gdx.graphics.getBackBufferHeight() * Constants.GAME_ASPECT_RATIO);
+        int gameHeight = Gdx.graphics.getBackBufferHeight();
+        OrthographicCamera uiCamera = new OrthographicCamera(gameWidth, Gdx.graphics.getBackBufferHeight());
+        Viewport uiViewport = new FitViewport(gameWidth, Gdx.graphics.getBackBufferHeight(), uiCamera);
         stage = new Stage(uiViewport);
 
         Image backgroundImage = new Image(atlas.findRegion("background"));
@@ -55,8 +55,8 @@ public class MainScreen implements InputProcessor, Screen {
         backgroundImage.setPosition(0, 0);
         stage.addActor(backgroundImage);
 
-        float datePadding = (float) Constants.DATE_PADDING / Constants.GAME_WIDTH * uiWidth;
-        float dateColWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * uiWidth;
+        float datePadding = (float) Constants.DATE_PADDING / Constants.GAME_WIDTH * gameWidth;
+        float dateColWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * gameWidth;
         float firstColumnY = uiViewport.getScreenHeight() - datePadding - dateColWidth;
 
         for (int i = 0; i < dateArray.length; i++) {
@@ -72,32 +72,20 @@ public class MainScreen implements InputProcessor, Screen {
             }
         }
 
-        float sliderWidth = (float) Constants.SLIDER_WIDTH / Constants.GAME_WIDTH * stage.getWidth();
-        final float sliderHeight = (float) Constants.SLIDER_HEIGHT / Constants.GAME_HEIGHT * stage.getHeight();
-        final Image sliderImage = new Image(atlas.findRegion("slider"));
-
-        sliderImage.addListener(new ActorGestureListener() {
+        // Create Slider
+        final Slider slider = new Slider(game, atlas, gameWidth, gameHeight);
+        slider.addListener(new ActorGestureListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
+                slider.snap(slider.getX());
             }
 
             @Override
             public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
-                sliderImage.setX(sliderImage.getX() + deltaX);
+                slider.setX(slider.getX() + deltaX);
             }
         });
-
-        sliderImage.setSize(sliderWidth, sliderHeight);
-        sliderImage.setPosition(0f / Constants.GAME_WIDTH * uiWidth, stage.getHeight() - sliderHeight);
-        stage.addActor(sliderImage);
-
-        String[] weekdayArray = game.bundle.get("weekdays").split(",");
-        for (int i = 0; i < weekdayArray.length; i++) {
-            Label dayLabel = new Label(weekdayArray[i], game.skin.get("weekday", Label.LabelStyle.class));
-            dayLabel.setPosition(datePadding + i * dateColWidth, uiViewport.getScreenHeight() - datePadding, Align.center);
-            stage.addActor(dayLabel);
-        }
+        stage.addActor(slider);
 
         final String[] months = game.bundle.get("months").split(",");
         curMonth = 0;
