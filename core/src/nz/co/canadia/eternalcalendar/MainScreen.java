@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -75,16 +76,15 @@ public class MainScreen implements InputProcessor, Screen {
         final float sliderHeight = (float) Constants.SLIDER_HEIGHT / Constants.GAME_HEIGHT * stage.getHeight();
         final Image sliderImage = new Image(atlas.findRegion("slider"));
 
-        sliderImage.addListener(new InputListener() {
+        sliderImage.addListener(new ActorGestureListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                sliderImage.setX(sliderImage.getX() + 90);
-                return true;
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
             }
 
             @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                sliderImage.setX(sliderImage.getX() - 90);
+            public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
+                sliderImage.setX(sliderImage.getX() + deltaX);
             }
         });
 
