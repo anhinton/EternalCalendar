@@ -38,3 +38,7 @@ under the SIL Open Font License, Version 1.1.
 
 `fonts/Podkova` "Podkova" Copyright 2011 The Podkova Project Authors (contact@cyreal.org) is 
 licensed under the SIL Open Font License, Version 1.1.
+
+`icons/info_icon.png` "Info" by [Google](https://material.io/resources/icons)
+is licensed under
+[Apache license version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html).
