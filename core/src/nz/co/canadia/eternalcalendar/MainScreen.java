@@ -29,11 +29,13 @@ public class MainScreen implements InputProcessor, Screen {
     private final EternalCalendar game;
     private final Stage stage;
     private final Slider slider;
+    private final String[] months;
     private int curMonth;
     private final TextButton monthButton;
 
     public MainScreen(EternalCalendar game) {
         this.game = game;
+        curMonth = Constants.DEFAULT_MONTH;
 
         TextureAtlas atlas = game.manager.get("textures/textures.atlas", TextureAtlas.class);
 
@@ -88,8 +90,6 @@ public class MainScreen implements InputProcessor, Screen {
         });
         stage.addActor(slider);
 
-        final String[] months = game.bundle.get("months").split(",");
-        curMonth = 0;
         float buttonPadding = (float) Constants.BUTTON_PADDING / Constants.GAME_HEIGHT * stage.getHeight();
         float monthButtonWidth = (float) Constants.MONTH_BUTTON_WIDTH / Constants.GAME_HEIGHT * stage.getWidth();
         float buttonSize = (float) Constants.BUTTON_SIZE / Constants.GAME_HEIGHT * stage.getHeight();
@@ -104,6 +104,8 @@ public class MainScreen implements InputProcessor, Screen {
         infoButton.setPosition(buttonPadding, buttonPadding);
         stage.addActor(infoButton);
 
+        // Create Month Button
+        months = game.bundle.get("months").split(",");
         monthButton = new TextButton(months[curMonth], game.skin, "month");
         monthButton.setPosition(stage.getWidth() - buttonPadding - monthButtonWidth,
                 buttonPadding);
@@ -111,8 +113,7 @@ public class MainScreen implements InputProcessor, Screen {
         monthButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                curMonth = (curMonth + 1) % 12;
-                monthButton.setText(months[curMonth]);
+                changeMonth();
             }
         });
         stage.addActor(monthButton);
@@ -121,6 +122,11 @@ public class MainScreen implements InputProcessor, Screen {
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
+    }
+
+    private void changeMonth() {
+        curMonth = (curMonth + 1) % 12;
+        monthButton.setText(months[curMonth]);
     }
 
     @Override
@@ -180,7 +186,7 @@ public class MainScreen implements InputProcessor, Screen {
                 break;
             // Change month
             case Input.Keys.M:
-//                monthButton
+                changeMonth();
                 break;
         }
         return true;

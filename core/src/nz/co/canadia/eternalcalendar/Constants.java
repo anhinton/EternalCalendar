@@ -13,6 +13,11 @@ public class Constants {
 
     public static final int SLIDER_WIDTH = 370;
     public static final int SLIDER_HEIGHT = 320;
+    public static final int DEFAULT_SLIDER_COLUMN = 0;
+    public static final int SLIDER_COLUMN_MIN = 0;
+    public static final int SLIDER_COLUMN_MAX = 6;
+
+    public static final int DEFAULT_MONTH = 0;
 
     public static final int DATE_PADDING = 50;
     public static final int DATE_COLUMN_WIDTH = 45;
@@ -27,8 +32,4 @@ public class Constants {
     public static final int MONTH_BUTTON_WIDTH = 120;
     public static final int BUTTON_SIZE = 40;
     public static final int INFO_ICON_SIZE = 30;
-
-    public static final int DEFAULT_SLIDER_COLUMN = 0;
-    public static final int SLIDER_COLUMN_MIN = 0;
-    public static final int SLIDER_COLIMN_MAX = 6;
 }

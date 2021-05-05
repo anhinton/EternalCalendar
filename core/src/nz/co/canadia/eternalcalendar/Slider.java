@@ -60,7 +60,7 @@ public class Slider extends Group {
         move();
     }
     private void move() {
-        column = MathUtils.clamp(column, Constants.SLIDER_COLUMN_MIN, Constants.SLIDER_COLIMN_MAX);
+        column = MathUtils.clamp(column, Constants.SLIDER_COLUMN_MIN, Constants.SLIDER_COLUMN_MAX);
         setX(column * colWidth);
     }
 }
