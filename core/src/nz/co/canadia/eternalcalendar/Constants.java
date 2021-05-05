@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 public class Constants {
     public static final String GAME_NAME = "Eternal Calendar";
     public static final Color BACKGROUND_COLOR = new Color(0,0,0, 1);
+    public static final String PREFERENCES_PATH = "nz.co.canadia.eternalcalendar.preferences";
 
     public static final int GAME_WIDTH = 640;
     public static final int GAME_HEIGHT = 480;

@@ -26,12 +26,14 @@ public class MainScreen implements InputProcessor, Screen {
     private final Stage stage;
     private final Slider slider;
     private final String[] months;
+    private int curColumn;
     private int curMonth;
     private final TextButton monthButton;
 
-    public MainScreen(EternalCalendar game) {
+    public MainScreen(final EternalCalendar game) {
         this.game = game;
-        curMonth = Constants.DEFAULT_MONTH;
+        curMonth = game.loadMonth();
+        curColumn = game.loadColumn();
 
         TextureAtlas atlas = game.manager.get("textures/textures.atlas", TextureAtlas.class);
 
@@ -46,16 +48,20 @@ public class MainScreen implements InputProcessor, Screen {
         stage.addActor(background);
 
         // Create Slider
-        slider = new Slider(game, atlas, gameWidth, gameHeight, Constants.DEFAULT_SLIDER_COLUMN);
+        slider = new Slider(game, atlas, gameWidth, gameHeight, curColumn);
         slider.addListener(new ActorGestureListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 slider.snap(slider.getX());
+                curColumn = slider.getColumn();
+                game.saveColumn(curColumn);
             }
 
             @Override
             public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
                 slider.setX(slider.getX() + deltaX);
+                curColumn = slider.getColumn();
+                game.saveColumn(curColumn);
             }
         });
         stage.addActor(slider);
@@ -97,6 +103,7 @@ public class MainScreen implements InputProcessor, Screen {
     private void changeMonth() {
         curMonth = (curMonth + 1) % 12;
         monthButton.setText(months[curMonth]);
+        game.saveMonth(curMonth);
     }
 
     @Override

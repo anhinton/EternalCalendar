@@ -39,6 +39,10 @@ public class Slider extends Group {
         setX(column * colWidth);
     }
 
+    public int getColumn() {
+        return column;
+    }
+
     @Override
     public void setX(float x) {
         x = MathUtils.clamp(x, 0, gameWidth - sliderWidth);

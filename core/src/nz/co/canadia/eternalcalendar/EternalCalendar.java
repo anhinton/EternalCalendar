@@ -3,9 +3,9 @@ package nz.co.canadia.eternalcalendar;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -20,6 +20,7 @@ public class EternalCalendar extends Game {
 	FontLoader fontLoader;
 	I18NBundle bundle;
 	Skin skin;
+	Preferences preferences;
 
 	public EternalCalendar(FontLoader fontLoader) {
 		this.fontLoader = fontLoader;
@@ -27,6 +28,7 @@ public class EternalCalendar extends Game {
 
 	@Override
 	public void create () {
+		preferences = Gdx.app.getPreferences(Constants.PREFERENCES_PATH);
 		I18NBundle.setSimpleFormatter(true);
 		// Catch BACK on Android devices
 		Gdx.input.setCatchKey(Input.Keys.BACK, true);
@@ -60,6 +62,24 @@ public class EternalCalendar extends Game {
 		bundle = manager.get("i18n/Bundle", I18NBundle.class);
 
 		this.setScreen(new MainScreen(this));
+	}
+
+	public int loadColumn() {
+		return preferences.getInteger("column", Constants.DEFAULT_SLIDER_COLUMN);
+	}
+
+	public int loadMonth() {
+		return preferences.getInteger("month", Constants.DEFAULT_MONTH);
+	}
+
+	public void saveColumn(int column) {
+		preferences.putInteger("column", column);
+		preferences.flush();
+	}
+
+	public void saveMonth(int month) {
+		preferences.putInteger("month", month);
+		preferences.flush();
 	}
 
 	@Override
