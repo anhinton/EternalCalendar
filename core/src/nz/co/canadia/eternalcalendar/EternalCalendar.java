@@ -6,6 +6,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -53,10 +55,12 @@ public class EternalCalendar extends Game {
 		skin.add("date", new Label.LabelStyle(fontLoader.getDateFont(manager), Constants.FONT_COLOR), Label.LabelStyle.class);
 		skin.add("smallDate", new Label.LabelStyle(fontLoader.getSmallDateFont(manager), Constants.FONT_COLOR), Label.LabelStyle.class);
 		skin.add("weekday", new Label.LabelStyle(fontLoader.getWeekdayFont(manager), Constants.FONT_COLOR), Label.LabelStyle.class);
+		skin.add("info", new Label.LabelStyle(fontLoader.getDateFont(manager), Constants.INFO_FONT_COLOR), Label.LabelStyle.class);
 		// TextButton.TextButtonStyle
-		TextButton.TextButtonStyle monthTextButtonStye = new TextButton.TextButtonStyle(skin.get("default", TextButton.TextButtonStyle.class));
-		monthTextButtonStye.font = fontLoader.getWeekdayFont(manager);
-		skin.add("month", monthTextButtonStye);
+		TextButton.TextButtonStyle monthTextButtonStyle = new TextButton.TextButtonStyle(skin.get("default", TextButton.TextButtonStyle.class));
+		monthTextButtonStyle.font = fontLoader.getWeekdayFont(manager);
+		monthTextButtonStyle.fontColor = Constants.FONT_COLOR;
+		skin.add("month", monthTextButtonStyle);
 
 		batch = new SpriteBatch();
 		bundle = manager.get("i18n/Bundle", I18NBundle.class);

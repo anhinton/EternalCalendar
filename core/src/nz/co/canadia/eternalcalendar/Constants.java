@@ -29,6 +29,7 @@ public class Constants {
     public static final int DATE_FONT_SIZE = 22;
     public static final int SMALL_DATE_FONT_SIZE = 11;
     public static final int WEEKDAY_FONT_SIZE = 22;
+    public static final Color INFO_FONT_COLOR = Color.WHITE;
 
     public static final int MONTH_BUTTON_WIDTH = 120;
     public static final int BUTTON_SIZE = 40;
