@@ -237,8 +237,6 @@ public class MainScreen implements InputProcessor, Screen {
 
         if (currentState == GameState.GAME) {
             switch (keycode) {
-                case Input.Keys.ESCAPE:
-                case Input.Keys.BACK:
                 case Input.Keys.Q:
                     goBack();
                     break;
@@ -259,15 +257,15 @@ public class MainScreen implements InputProcessor, Screen {
                     monthButton.fire(touchDownEvent);
                     break;
             }
-        } else {
-            switch (keycode) {
-                // Go back
-                case Input.Keys.ESCAPE:
-                case Input.Keys.BACK:
-                    goBack();
-                    break;
-            }
         }
+        switch (keycode) {
+            // Go back
+            case Input.Keys.ESCAPE:
+            case Input.Keys.BACK:
+                goBack();
+                break;
+        }
+
         return true;
     }
 
