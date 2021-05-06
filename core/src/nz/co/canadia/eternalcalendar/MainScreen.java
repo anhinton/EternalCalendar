@@ -26,6 +26,7 @@ public class MainScreen implements InputProcessor, Screen {
     private final Stage stage;
     private final Slider slider;
     private final String[] months;
+    private final ImageButton infoButton;
     private int curColumn;
     private int curMonth;
     private final TextButton monthButton;
@@ -75,7 +76,7 @@ public class MainScreen implements InputProcessor, Screen {
         TextureRegionDrawable infoIconDrawable = new TextureRegionDrawable(atlas.findRegion("info_icon"));
         infoIconDrawable.setMinSize(infoIconSize, infoIconSize);
         infoButtonStyle.imageUp = infoIconDrawable;
-        ImageButton infoButton = new ImageButton(infoButtonStyle);
+        infoButton = new ImageButton(infoButtonStyle);
         infoButton.setSize(buttonSize, buttonSize);
         infoButton.setPosition(buttonPadding, buttonPadding);
         stage.addActor(infoButton);
@@ -149,9 +150,13 @@ public class MainScreen implements InputProcessor, Screen {
 
     @Override
     public boolean keyDown(int keycode) {
+        InputEvent touchDownEvent = new InputEvent();
+        touchDownEvent.setType(InputEvent.Type.touchDown);
+
         switch (keycode) {
             case Input.Keys.ESCAPE:
             case Input.Keys.BACK:
+            case Input.Keys.Q:
                 Gdx.app.exit();
                 break;
             // Slider Movement
@@ -161,11 +166,14 @@ public class MainScreen implements InputProcessor, Screen {
             case Input.Keys.RIGHT:
                 slider.moveRight();
                 break;
+            // Info button
+            case Input.Keys.I:
+            case Input.Keys.SLASH:
+                infoButton.fire(touchDownEvent);
+                break;
             // Change month
             case Input.Keys.M:
-                InputEvent e = new InputEvent();
-                e.setType(InputEvent.Type.touchDown);
-                monthButton.fire(e);
+                monthButton.fire(touchDownEvent);
                 break;
         }
         return true;
@@ -173,10 +181,17 @@ public class MainScreen implements InputProcessor, Screen {
 
     @Override
     public boolean keyUp(int keycode) {
-        if (keycode == Input.Keys.M) {
-            InputEvent e = new InputEvent();
-            e.setType(InputEvent.Type.touchUp);
-            monthButton.fire(e);
+        InputEvent touchUpEvent = new InputEvent();
+        touchUpEvent.setType(InputEvent.Type.touchUp);
+
+        switch(keycode) {
+            case Input.Keys.I:
+            case Input.Keys.SLASH:
+                infoButton.fire(touchUpEvent);
+                break;
+            case Input.Keys.M:
+                monthButton.fire(touchUpEvent);
+                break;
         }
         return false;
     }
