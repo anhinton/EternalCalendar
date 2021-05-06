@@ -31,7 +31,6 @@ public class AndroidFontLoader implements FontLoader {
         dateFont.fontFileName = "fonts/Podkova-VariableFont_wght.ttf";
         dateFont.fontParameters.characters = Constants.FONT_CHARACTERS;
         dateFont.fontParameters.size = MathUtils.round((float) Constants.DATE_FONT_SIZE / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
-        dateFont.fontParameters.color = Constants.FONT_COLOR;
         manager.load("fonts/Podkova-VariableFont_wghtDate.ttf", BitmapFont.class, dateFont);
     }
 
@@ -48,7 +47,6 @@ public class AndroidFontLoader implements FontLoader {
         smallDateFont.fontFileName = "fonts/Podkova-VariableFont_wght.ttf";
         smallDateFont.fontParameters.characters = Constants.FONT_CHARACTERS;
         smallDateFont.fontParameters.size = MathUtils.round((float) Constants.SMALL_DATE_FONT_SIZE / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
-        smallDateFont.fontParameters.color = Constants.FONT_COLOR;
         manager.load("fonts/Podkova-VariableFont_wghtSmallDate.ttf", BitmapFont.class, smallDateFont);
     }
 
@@ -65,7 +63,6 @@ public class AndroidFontLoader implements FontLoader {
         weekdayFont.fontFileName = "fonts/Inconsolata-VariableFont_wdth,wght.ttf";
         weekdayFont.fontParameters.characters = Constants.FONT_CHARACTERS;
         weekdayFont.fontParameters.size = MathUtils.round((float) Constants.WEEKDAY_FONT_SIZE / Constants.GAME_HEIGHT * Gdx.graphics.getBackBufferHeight());
-        weekdayFont.fontParameters.color = Constants.FONT_COLOR;
         manager.load("fonts/Inconsolata-VariableFont_wdth,wghtWeekday.ttf", BitmapFont.class, weekdayFont);
     }
 
