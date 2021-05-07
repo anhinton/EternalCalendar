@@ -20,8 +20,7 @@ public class Slider extends Group {
         sliderWidth = (float) Constants.SLIDER_WIDTH / Constants.GAME_WIDTH * gameWidth;
         float sliderHeight = (float) Constants.SLIDER_HEIGHT / Constants.GAME_HEIGHT * gameHeight;
         float padding = (float) Constants.DATE_PADDING / Constants.GAME_WIDTH * gameWidth;
-        // TODO: Try to set colWidth to whole pixel values so weekday fonts don't look bad on mobile
-        colWidth = MathUtils.round((float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * gameWidth);
+        colWidth = (float) Constants.DATE_COLUMN_WIDTH / Constants.GAME_WIDTH * gameWidth;
 
         // Slider panel
         final Image sliderImage = new Image(atlas.findRegion("slider"));
@@ -46,23 +45,23 @@ public class Slider extends Group {
 
     @Override
     public void setX(float x) {
-        x = MathUtils.clamp(x, 0, gameWidth - sliderWidth);
+        x = MathUtils.round(MathUtils.clamp(x, 0, gameWidth - sliderWidth));
         super.setX(x);
     }
 
     public void snap(float x) {
         column = MathUtils.round (x / colWidth);
-        setX(column * colWidth);
+        move();
     }
 
     public void moveLeft() {
         column--;
-        move();
+        snap(column * colWidth);
     }
 
     public void moveRight() {
         column++;
-        move();
+        snap(column * colWidth);
     }
     private void move() {
         column = MathUtils.clamp(column, Constants.SLIDER_COLUMN_MIN, Constants.SLIDER_COLUMN_MAX);
