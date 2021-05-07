@@ -44,7 +44,6 @@ public class EternalCalendar extends Game {
 		fontLoader.loadWeekdayFont(manager);
 		fontLoader.loadCreditsFont(manager);
 		// Textures etc
-		// TODO: Load these on a loading screen
 		manager.load("textures/textures.atlas", TextureAtlas.class);
 		manager.finishLoading();
 
