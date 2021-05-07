@@ -46,7 +46,6 @@ public class EternalCalendar extends Game {
 		// Textures etc
 		// TODO: Load these on a loading screen
 		manager.load("textures/textures.atlas", TextureAtlas.class);
-		TextureLoader.TextureParameter param = new TextureLoader.TextureParameter();
 		manager.finishLoading();
 
 		// Prepare Skin
