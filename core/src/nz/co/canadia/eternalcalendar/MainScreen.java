@@ -25,8 +25,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-
-
 public class MainScreen implements InputProcessor, Screen {
     private final EternalCalendar game;
     private final Stage gameStage;
