@@ -35,4 +35,14 @@ public class DesktopFontLoader implements FontLoader {
     public BitmapFont getWeekdayFont(AssetManager manager) {
         return manager.get("fonts/Inconsolata22.fnt", BitmapFont.class);
     }
+
+    @Override
+    public void loadCreditsFont(AssetManager manager) {
+        manager.load("fonts/Inconsolata16.fnt", BitmapFont.class);
+    }
+
+    @Override
+    public BitmapFont getCreditsFont(AssetManager manager) {
+        return manager.get("fonts/Inconsolata16.fnt", BitmapFont.class);
+    }
 }

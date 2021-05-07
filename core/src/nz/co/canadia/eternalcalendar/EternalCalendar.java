@@ -6,11 +6,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -43,6 +42,7 @@ public class EternalCalendar extends Game {
 		fontLoader.loadDateFont(manager);
 		fontLoader.loadSmallDateFont(manager);
 		fontLoader.loadWeekdayFont(manager);
+		fontLoader.loadCreditsFont(manager);
 		// Textures etc
 		// TODO: Load these on a loading screen
 		manager.load("textures/textures.atlas", TextureAtlas.class);
@@ -52,15 +52,20 @@ public class EternalCalendar extends Game {
 		// Prepare Skin
 		skin = manager.get("skin/uiskin.json", Skin.class);
 		// Label.LabelStyle
-		skin.add("date", new Label.LabelStyle(fontLoader.getDateFont(manager), Constants.FONT_COLOR), Label.LabelStyle.class);
-		skin.add("smallDate", new Label.LabelStyle(fontLoader.getSmallDateFont(manager), Constants.FONT_COLOR), Label.LabelStyle.class);
-		skin.add("weekday", new Label.LabelStyle(fontLoader.getWeekdayFont(manager), Constants.FONT_COLOR), Label.LabelStyle.class);
-		skin.add("info", new Label.LabelStyle(fontLoader.getDateFont(manager), Constants.INFO_FONT_COLOR), Label.LabelStyle.class);
+		skin.add("date", new Label.LabelStyle(fontLoader.getDateFont(manager), Constants.GAME_FONT_COLOR), Label.LabelStyle.class);
+		skin.add("smallDate", new Label.LabelStyle(fontLoader.getSmallDateFont(manager), Constants.GAME_FONT_COLOR), Label.LabelStyle.class);
+		skin.add("weekday", new Label.LabelStyle(fontLoader.getWeekdayFont(manager), Constants.GAME_FONT_COLOR), Label.LabelStyle.class);
+		skin.add("info", new Label.LabelStyle(fontLoader.getWeekdayFont(manager), Constants.PANEL_FONT_COLOR), Label.LabelStyle.class);
+		skin.add("credits", new Label.LabelStyle(fontLoader.getCreditsFont(manager), Constants.PANEL_FONT_COLOR), Label.LabelStyle.class);
 		// TextButton.TextButtonStyle
 		TextButton.TextButtonStyle monthTextButtonStyle = new TextButton.TextButtonStyle(skin.get("default", TextButton.TextButtonStyle.class));
 		monthTextButtonStyle.font = fontLoader.getWeekdayFont(manager);
-		monthTextButtonStyle.fontColor = Constants.FONT_COLOR;
+		monthTextButtonStyle.fontColor = Constants.GAME_FONT_COLOR;
 		skin.add("month", monthTextButtonStyle);
+		// ScrollPaneStyles
+		ScrollPane.ScrollPaneStyle creditsScrollPaneStyle = new ScrollPane.ScrollPaneStyle(skin.get("default", ScrollPane.ScrollPaneStyle.class));
+		creditsScrollPaneStyle.background = null;
+		skin.add("credits", creditsScrollPaneStyle);
 
 		batch = new SpriteBatch();
 		bundle = manager.get("i18n/Bundle", I18NBundle.class);

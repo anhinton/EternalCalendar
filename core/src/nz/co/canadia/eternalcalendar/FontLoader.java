@@ -17,4 +17,7 @@ public interface FontLoader {
 
     BitmapFont getWeekdayFont (AssetManager manager);
 
+    void loadCreditsFont (AssetManager manager);
+
+    BitmapFont getCreditsFont(AssetManager manager);
 }

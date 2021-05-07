@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -35,10 +34,12 @@ public class MainScreen implements InputProcessor, Screen {
     private final Table table;
     private final float buttonPadding;
     private final InputMultiplexer multiplexer;
+    private final float textButtonWidth;
+    private final float buttonSize;
     private int curColumn;
     private int curMonth;
     private final TextButton monthButton;
-    private enum GameState { GAME, INFO}
+    private enum GameState { GAME, INFO, CREDITS }
     private GameState currentState;
 
     public MainScreen(final EternalCalendar game) {
@@ -79,8 +80,8 @@ public class MainScreen implements InputProcessor, Screen {
         gameStage.addActor(slider);
 
         buttonPadding = (float) Constants.BUTTON_PADDING / Constants.GAME_HEIGHT * gameStage.getHeight();
-        float monthButtonWidth = (float) Constants.MONTH_BUTTON_WIDTH / Constants.GAME_HEIGHT * gameStage.getWidth();
-        float buttonSize = (float) Constants.BUTTON_SIZE / Constants.GAME_HEIGHT * gameStage.getHeight();
+        textButtonWidth = (float) Constants.TEXT_BUTTON_WIDTH / Constants.GAME_HEIGHT * gameStage.getWidth();
+        buttonSize = (float) Constants.BUTTON_SIZE / Constants.GAME_HEIGHT * gameStage.getHeight();
         float infoIconSize = (float) Constants.INFO_ICON_SIZE / Constants.GAME_HEIGHT * gameStage.getHeight();
 
         ImageButton.ImageButtonStyle infoButtonStyle = new ImageButton.ImageButtonStyle(game.skin.get("default", Button.ButtonStyle.class));
@@ -91,7 +92,7 @@ public class MainScreen implements InputProcessor, Screen {
         infoButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                showInfoMenu();
+                showInfoPanel();
             }
         });
         infoButton.setSize(buttonSize, buttonSize);
@@ -101,9 +102,9 @@ public class MainScreen implements InputProcessor, Screen {
         // Create Month Button
         months = game.bundle.get("months").split(",");
         monthButton = new TextButton(months[curMonth], game.skin, "month");
-        monthButton.setPosition(gameStage.getWidth() - buttonPadding - monthButtonWidth,
+        monthButton.setPosition(gameStage.getWidth() - buttonPadding - textButtonWidth,
                 buttonPadding);
-        monthButton.setSize(monthButtonWidth, buttonSize);
+        monthButton.setSize(textButtonWidth, buttonSize);
         monthButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -129,7 +130,10 @@ public class MainScreen implements InputProcessor, Screen {
                 Gdx.app.exit();
                 break;
             case INFO:
-                hideInfoMenu();
+                hidePanel();
+                break;
+            case CREDITS:
+                showInfoPanel();
                 break;
         }
     }
@@ -146,32 +150,83 @@ public class MainScreen implements InputProcessor, Screen {
         multiplexer.addProcessor(this);
     }
 
-    private void showInfoMenu() {
+    private void showInfoPanel() {
         currentState = GameState.INFO;
         setMenuInputs();
         table.clear();
 
         Table infoTable = new Table();
         infoTable.pad(buttonPadding);
+        infoTable.background(game.skin.getDrawable("default-rect"));
 
-        Label infoTitle = new Label("Eternal Calendar", game.skin, "info");
-        infoTable.add(infoTitle);
+        Label infoTitleLabel = new Label(game.bundle.get("infoTitle"), game.skin, "info");
+        infoTable.add(infoTitleLabel).space(buttonPadding).colspan(2);
+        infoTable.row();
+        Label infoTextLabel = new Label(game.bundle.get("infoText"), game.skin, "info");
+        infoTable.add(infoTextLabel).space(buttonPadding).colspan(2);
         infoTable.row();
 
-        ScrollPane scrollPane = new ScrollPane(infoTable, game.skin, "default");
-        scrollPane.addListener(new InputListener() {
+        TextButton creditsButton = new TextButton(game.bundle.get("creditsButton"), game.skin, "month");
+        creditsButton.addListener(new ChangeListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                hideInfoMenu();
-                return true;
+            public void changed(ChangeEvent event, Actor actor) {
+                showCreditsPanel();
             }
         });
-        table.add(scrollPane)
-//                .prefSize(gameWidth, gameHeight)
+        infoTable.add(creditsButton).space(buttonPadding).prefSize(textButtonWidth, buttonSize);
+
+        TextButton backButton = new TextButton(game.bundle.get("backButton"), game.skin, "month");
+        backButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                goBack();
+            }
+        });
+        infoTable.add(backButton).space(buttonPadding).prefSize(textButtonWidth, buttonSize);
+
+        table.add(infoTable).pad(buttonPadding);
+    }
+
+    private void showCreditsPanel() {
+        currentState = GameState.CREDITS;
+        setMenuInputs();
+        table.clear();
+
+        Table infoTable = new Table();
+        infoTable.pad(buttonPadding);
+        infoTable.background(game.skin.getDrawable("default-rect"));
+
+        Label creditsTitleLabel = new Label(game.bundle.get("creditsTitle"), game.skin, "info");
+        infoTable.add(creditsTitleLabel)
+                .space(buttonPadding);
+        infoTable.row();
+
+        String creditsText = Gdx.files.internal("data/credits.txt").readString("UTF-8");
+        Label creditsTextLabel = new Label(creditsText, game.skin, "credits");
+        creditsTextLabel.setWrap(true);
+        ScrollPane creditsScrollPane = new ScrollPane(creditsTextLabel, game.skin, "credits");
+        creditsScrollPane.setFadeScrollBars(false);
+        infoTable.add(creditsScrollPane)
+                .prefWidth(Gdx.graphics.getBackBufferWidth())
+                .space(buttonPadding);
+        infoTable.row();
+
+        TextButton backButton = new TextButton(game.bundle.get("backButton"), game.skin, "month");
+        backButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                goBack();
+            }
+        });
+        infoTable.add(backButton)
+                .space(buttonPadding)
+                .prefSize(textButtonWidth, buttonSize);
+
+        table.add(infoTable)
                 .pad(buttonPadding);
     }
 
-    private void hideInfoMenu() {
+    private void hidePanel() {
         currentState = GameState.GAME;
         setGameInputs();
         table.clearChildren();
@@ -194,6 +249,7 @@ public class MainScreen implements InputProcessor, Screen {
 
         gameStage.act(delta);
         gameStage.draw();
+        uiStage.act(delta);
         uiStage.draw();
 
         game.batch.setProjectionMatrix(gameStage.getViewport().getCamera().combined);
@@ -291,8 +347,7 @@ public class MainScreen implements InputProcessor, Screen {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        hideInfoMenu();
-        return true;
+        return false;
     }
 
     @Override
