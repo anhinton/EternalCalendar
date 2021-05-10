@@ -13,9 +13,16 @@ background
   index: -1
 info_icon
   rotate: false
-  xy: 644, 130
+  xy: 644, 22
   size: 30, 30
   orig: 30, 30
+  offset: 0, 0
+  index: -1
+logo
+  rotate: false
+  xy: 644, 54
+  size: 256, 106
+  orig: 256, 106
   offset: 0, 0
   index: -1
 slider

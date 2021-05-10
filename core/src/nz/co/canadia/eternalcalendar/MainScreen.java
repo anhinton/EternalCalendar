@@ -6,12 +6,15 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -80,10 +83,11 @@ public class MainScreen implements InputProcessor, Screen {
         gameStage.addActor(slider);
 
         buttonPadding = (float) Constants.BUTTON_PADDING / Constants.GAME_HEIGHT * gameStage.getHeight();
-        textButtonWidth = (float) Constants.TEXT_BUTTON_WIDTH / Constants.GAME_HEIGHT * gameStage.getWidth();
+        textButtonWidth = (float) Constants.TEXT_BUTTON_WIDTH / Constants.GAME_WIDTH * gameStage.getWidth();
         buttonSize = (float) Constants.BUTTON_SIZE / Constants.GAME_HEIGHT * gameStage.getHeight();
         float infoIconSize = (float) Constants.INFO_ICON_SIZE / Constants.GAME_HEIGHT * gameStage.getHeight();
 
+        // Create info button
         ImageButton.ImageButtonStyle infoButtonStyle = new ImageButton.ImageButtonStyle(game.skin.get("default", Button.ButtonStyle.class));
         TextureRegionDrawable infoIconDrawable = new TextureRegionDrawable(atlas.findRegion("info_icon"));
         infoIconDrawable.setMinSize(infoIconSize, infoIconSize);
@@ -98,6 +102,19 @@ public class MainScreen implements InputProcessor, Screen {
         infoButton.setSize(buttonSize, buttonSize);
         infoButton.setPosition(buttonPadding, buttonPadding);
         gameStage.addActor(infoButton);
+
+        // Create logo image
+        TextureRegionDrawable logoDrawable = new TextureRegionDrawable(atlas.findRegion("logo"));
+        logoDrawable.setMinSize(
+                (float) logoDrawable.getRegion().getRegionWidth() / Constants.GAME_WIDTH * gameWidth,
+                (float) logoDrawable.getRegion().getRegionHeight() / Constants.GAME_HEIGHT * gameHeight);
+        Image logoImage = new Image(logoDrawable);
+        float logoCenterX = (float) Constants.LOGO_CENTER_X / Constants.GAME_WIDTH * gameWidth;
+        float logoCenterY = (float) Constants.LOGO_CENTER_Y / Constants.GAME_HEIGHT * gameHeight;
+        logoImage.setPosition(
+                logoCenterX - logoImage.getWidth() / 2,
+                logoCenterY - logoImage.getHeight() / 2);
+        gameStage.addActor(logoImage);
 
         // Create Month Button
         months = game.bundle.get("months").split(",");

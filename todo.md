@@ -6,3 +6,8 @@
   
   + Create a loading screen for loading textures
       - Lucky I have no sounds!
+      
+## Done
+
+  + ~~A logo, please!~~
+  

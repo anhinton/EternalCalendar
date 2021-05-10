@@ -35,4 +35,7 @@ public class Constants {
     public static final int TEXT_BUTTON_WIDTH = 120;
     public static final int BUTTON_SIZE = 40;
     public static final int INFO_ICON_SIZE = 30;
+
+    public static final int LOGO_CENTER_X = 280;
+    public static final int LOGO_CENTER_Y = 80;
 }
