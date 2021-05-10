@@ -6,9 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -262,7 +260,7 @@ public class MainScreen implements InputProcessor, Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Constants.BACKGROUND_COLOR);
+        ScreenUtils.clear(Constants.GAME_BACKGROUND_COLOR);
 
         gameStage.act(delta);
         gameStage.draw();

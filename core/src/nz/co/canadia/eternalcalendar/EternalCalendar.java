@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -22,6 +23,7 @@ public class EternalCalendar extends Game {
 	I18NBundle bundle;
 	Skin skin;
 	Preferences preferences;
+	ShapeRenderer shape;
 
 	public EternalCalendar(FontLoader fontLoader) {
 		this.fontLoader = fontLoader;
@@ -43,8 +45,6 @@ public class EternalCalendar extends Game {
 		fontLoader.loadSmallDateFont(manager);
 		fontLoader.loadWeekdayFont(manager);
 		fontLoader.loadCreditsFont(manager);
-		// Textures etc
-		manager.load("textures/textures.atlas", TextureAtlas.class);
 		manager.finishLoading();
 
 		// Prepare Skin
@@ -67,8 +67,9 @@ public class EternalCalendar extends Game {
 
 		batch = new SpriteBatch();
 		bundle = manager.get("i18n/Bundle", I18NBundle.class);
+		shape = new ShapeRenderer();
 
-		this.setScreen(new MainScreen(this));
+		this.setScreen(new LoadingScreen(this));
 	}
 
 	public int loadColumn() {
@@ -98,5 +99,6 @@ public class EternalCalendar extends Game {
 	public void dispose () {
 		batch.dispose();
 		manager.dispose();
+		shape.dispose();
 	}
 }
