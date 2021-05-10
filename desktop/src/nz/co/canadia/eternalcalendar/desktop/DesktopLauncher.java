@@ -12,7 +12,9 @@ public class DesktopLauncher {
 		config.setTitle(Constants.GAME_NAME);
 		config.setWindowedMode(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
 		config.setResizable(false);
-		// TODO: can I move a desktop window without a border? Sensibly exit?
+		config.setWindowIcon("desktopIcons/icon_128.png",
+				"desktopIcons/icon_32.png",
+				"desktopIcons/icon_16.png");
 		config.setDecorated(true);
 
 		new Lwjgl3Application(new EternalCalendar(new DesktopFontLoader()), config);
