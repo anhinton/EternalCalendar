@@ -27,8 +27,8 @@
               - ~~Linux~~
               - ~~MacOS~~
               - ~~JAR~~
-          - Banner
-          - Cover image (630x500)
+          - ~~Banner~~
+          - ~~Cover image (630x500)~~
           - Short description
           - Description
           - ~~Screenshots~~
@@ -36,7 +36,7 @@
           - ~~Upload AAB~~
           - Short description
           - Full description
-          - Feature graphic (1024x500)
+          - ~~Feature graphic (1024x500)~~
           - ~~Screenshots~~
               - ~~phone x2~~
               - ~~7-inch tablet~~
