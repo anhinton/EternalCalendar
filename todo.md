@@ -3,19 +3,6 @@
   + Sort out Patreon thanks for credits.txt
       - I've sent messages, probably best to leave this blank for now as no one has claimed
       
-  + Release build
-      - ~~Bump version~~
-      - ~~Android~~
-          - ~~APK~~
-          - ~~AAB~~
-      - Destkop
-          - ~~JAR~~
-          - ~~Pack Windows~~
-          - Pack Linux
-          - ~~Pack MacOS~~
-      - ~~Html~~
-      - ~~iOS IPA~~
-      
   + Upload to stores
       - itch.io
           - ~~Upload~~
@@ -63,6 +50,19 @@
       - Twitter          
       
 ## Done
+      
+  + ~~Release build~~
+      - ~~Bump version~~
+      - ~~Android~~
+          - ~~APK~~
+          - ~~AAB~~
+      - ~~Destkop~~
+          - ~~JAR~~
+          - ~~Pack Windows~~
+          - ~~Pack Linux~~
+          - ~~Pack MacOS~~
+      - ~~Html~~
+      - ~~iOS IPA~~
 
   + ~~Set up iOS icons~~
   
