@@ -20,13 +20,13 @@
       
   + Upload to stores
       - itch.io
-          - Upload
-              - Html
-              - Android APK
-              - Windows
-              - Linux
-              - MacOS
-              - JAR
+          - ~~Upload~~
+              - ~~Html~~
+              - ~~Android APK~~
+              - ~~Windows~~
+              - ~~Linux~~
+              - ~~MacOS~~
+              - ~~JAR~~
           - Banner
           - Cover image (630x500)
           - Short description
