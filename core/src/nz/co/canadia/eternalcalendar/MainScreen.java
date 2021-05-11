@@ -40,6 +40,8 @@ public class MainScreen implements InputProcessor, Screen {
     private int curColumn;
     private int curMonth;
     private final TextButton monthButton;
+    private ScrollPane creditsScrollPane;
+
     private enum GameState { GAME, INFO, CREDITS }
     private GameState currentState;
 
@@ -219,7 +221,7 @@ public class MainScreen implements InputProcessor, Screen {
         String creditsText = Gdx.files.internal("data/credits.txt").readString("UTF-8");
         Label creditsTextLabel = new Label(creditsText, game.skin, "credits");
         creditsTextLabel.setWrap(true);
-        ScrollPane creditsScrollPane = new ScrollPane(creditsTextLabel, game.skin, "credits");
+        creditsScrollPane = new ScrollPane(creditsTextLabel, game.skin, "credits");
         creditsScrollPane.setFadeScrollBars(false);
         infoTable.add(creditsScrollPane)
                 .prefWidth(Gdx.graphics.getBackBufferWidth())
@@ -324,6 +326,28 @@ public class MainScreen implements InputProcessor, Screen {
                 // Change month
                 case Input.Keys.M:
                     monthButton.fire(touchDownEvent);
+                    break;
+            }
+        } else if (currentState == GameState.INFO) {
+            // Show credits
+            switch (keycode) {
+                case Input.Keys.C:
+                    showCreditsPanel();
+                    break;
+                case Input.Keys.B:
+                    goBack();
+                    break;
+            }
+        } else if (currentState == GameState.CREDITS) {
+            switch (keycode) {
+                case Input.Keys.DOWN:
+                    creditsScrollPane.fling(1, 0, -Constants.CREDITS_FLING_VELOCITY);
+                    break;
+                case Input.Keys.UP:
+                    creditsScrollPane.fling(1, 0, Constants.CREDITS_FLING_VELOCITY);
+                    break;
+                case Input.Keys.B:
+                    goBack();
                     break;
             }
         }

@@ -39,4 +39,6 @@ public class Constants {
 
     public static final int LOGO_CENTER_X = 280;
     public static final int LOGO_CENTER_Y = 80;
+
+    public static final float CREDITS_FLING_VELOCITY = 400;
 }
