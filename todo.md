@@ -6,7 +6,7 @@
       - I've sent messages, probably best to leave this blank for now as no one has claimed
       
   + Release build
-      - Bump version
+      - ~~Bump version~~
       - Android
           - APK
           - AAB
