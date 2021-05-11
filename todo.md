@@ -40,13 +40,13 @@
               - iPhone 5.5-inch
               - iPad 12.9-inch
           - Description
-          - Privacy policy
+          - ~~Privacy policy~~
       - https://eternalcalendar.canadia.co.nz/
           - Image
           - itch.io embed
           - Description
           - Credits
-          - Privacy policy
+          - ~~Privacy policy~~
           
   + Announcement post
       - canadia.co.nz/posts
