@@ -37,10 +37,10 @@
           - Short description
           - Full description
           - Feature graphic (1024x500)
-          - Screenshots
-              - phone x2
-              - 7-inch tablet
-              - 10-inch tablet
+          - ~~Screenshots~~
+              - ~~phone x2~~
+              - ~~7-inch tablet~~
+              - ~~10-inch tablet~~
       - Apple App Store
           - ~~Upload IPA~~
           - Subtitle
