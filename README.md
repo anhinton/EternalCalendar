@@ -2,7 +2,7 @@
 
 by Ashley Noel Hinton
 
-This "game" is built using the libGDX Java game development
+This software is built using the libGDX Java game development
 framework <http://libgdx.badlogicgames.com/>. Instructions for
 importing and running the project in IntelliJ IDEA or Android Studio
 can be found
