@@ -7,25 +7,33 @@
       
   + Release build
       - ~~Bump version~~
-      - Android
-          - APK
-          - AAB
+      - ~~Android~~
+          - ~~APK~~
+          - ~~AAB~~
       - Destkop
-          - JAR
-          - Pack Windows
+          - ~~JAR~~
+          - ~~Pack Windows~~
           - Pack Linux
           - Pack MacOS
-      - Html
+      - ~~Html~~
       - iOS IPA
       
   + Upload to stores
       - itch.io
+          - Upload
+              - Html
+              - Android APK
+              - Windows
+              - Linux
+              - MacOS
+              - JAR
           - Banner
           - Cover image (630x500)
           - Short description
           - Description
           - Screenshots
       - Google Play
+          - ~~Upload AAB~~
           - Short description
           - Full description
           - Feature graphic (1024x500)
@@ -34,6 +42,7 @@
               - 7-inch tablet
               - 10-inch tablet
       - Apple App Store
+          - Upload IPA
           - Subtitle
           - Screenshots
               - iPhone 6.5-inch
