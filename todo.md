@@ -1,7 +1,5 @@
 # todo.md
 
-  + Set up iOS icons
-
   + Sort out Patreon thanks for credits.txt
       - I've sent messages, probably best to leave this blank for now as no one has claimed
       
@@ -65,6 +63,8 @@
       - Twitter          
       
 ## Done
+
+  + ~~Set up iOS icons~~
   
   + ~~Set up eternalcalendar.canadia.co.nz~~
       - ~~Set up on AWS~~
