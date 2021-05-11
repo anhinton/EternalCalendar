@@ -31,7 +31,7 @@
           - Cover image (630x500)
           - Short description
           - Description
-          - Screenshots
+          - ~~Screenshots~~
       - Google Play
           - ~~Upload AAB~~
           - Short description
