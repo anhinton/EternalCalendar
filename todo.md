@@ -44,10 +44,10 @@
       - Apple App Store
           - ~~Upload IPA~~
           - Subtitle
-          - Screenshots
-              - iPhone 6.5-inch
-              - iPhone 5.5-inch
-              - iPad 12.9-inch
+          - ~~Screenshots~~
+              - ~~iPhone 6.5-inch~~
+              - ~~iPhone 5.5-inch~~
+              - ~~iPad 12.9-inch~~
           - Description
           - ~~Privacy policy~~
       - https://eternalcalendar.canadia.co.nz/
