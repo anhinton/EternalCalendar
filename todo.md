@@ -14,9 +14,9 @@
           - ~~JAR~~
           - ~~Pack Windows~~
           - Pack Linux
-          - Pack MacOS
+          - ~~Pack MacOS~~
       - ~~Html~~
-      - iOS IPA
+      - ~~iOS IPA~~
       
   + Upload to stores
       - itch.io
@@ -42,7 +42,7 @@
               - 7-inch tablet
               - 10-inch tablet
       - Apple App Store
-          - Upload IPA
+          - ~~Upload IPA~~
           - Subtitle
           - Screenshots
               - iPhone 6.5-inch
