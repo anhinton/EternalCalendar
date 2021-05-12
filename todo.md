@@ -14,9 +14,10 @@
               - ~~JAR~~
           - ~~Banner~~
           - ~~Cover image (630x500)~~
-          - Short description
-          - Description
+          - ~~Short description~~
+          - ~~Description~~
           - ~~Screenshots~~
+          - Publish
       - Google Play
           - ~~Upload AAB~~
           - Short description
@@ -26,20 +27,27 @@
               - ~~phone x2~~
               - ~~7-inch tablet~~
               - ~~10-inch tablet~~
+          - ~~Roll out to production~~
+          - Publish
       - Apple App Store
           - ~~Upload IPA~~
-          - Subtitle
+          - ~~Subtitle~~
           - ~~Screenshots~~
               - ~~iPhone 6.5-inch~~
               - ~~iPhone 5.5-inch~~
               - ~~iPad 12.9-inch~~
-          - Description
+          - ~~Description~~
           - ~~Privacy policy~~
+          - ~~Submit for review~~
+          - Publish
       - https://eternalcalendar.canadia.co.nz/
-          - Image
+          - ~~Image~~
           - itch.io embed
-          - Description
-          - Credits
+          - Link to itch.io
+          - Google Play Store links
+          - Apple App Store links
+          - ~~Description~~
+          - ~~Credits~~
           - ~~Privacy policy~~
           
   + Announcement post
