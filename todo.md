@@ -1,10 +1,16 @@
 # todo.md
-
-  + Sort out Patreon thanks for credits.txt
-      - I've sent messages, probably best to leave this blank for now as no one has claimed
+          
+  + Announcement post
+      - ~~canadia.co.nz/posts~~
+      - Patreon
+      - Ko-fi
+      - ~~itch.io~~
+      - Twitter          
       
-  + Upload to stores
-      - itch.io
+## Done
+      
+  + ~~Upload to stores~~
+      - ~~itch.io~~
           - ~~Upload~~
               - ~~Html~~
               - ~~Android APK~~
@@ -17,19 +23,19 @@
           - ~~Short description~~
           - ~~Description~~
           - ~~Screenshots~~
-          - Publish
-      - Google Play
+          - ~~Publish~~
+      - ~~Google Play~~
           - ~~Upload AAB~~
-          - Short description
-          - Full description
+          - ~~Short description~~
+          - ~~Full description~~
           - ~~Feature graphic (1024x500)~~
           - ~~Screenshots~~
               - ~~phone x2~~
               - ~~7-inch tablet~~
               - ~~10-inch tablet~~
           - ~~Roll out to production~~
-          - Publish
-      - Apple App Store
+          - ~~Publish~~
+      - ~~Apple App Store~~
           - ~~Upload IPA~~
           - ~~Subtitle~~
           - ~~Screenshots~~
@@ -39,25 +45,16 @@
           - ~~Description~~
           - ~~Privacy policy~~
           - ~~Submit for review~~
-          - Publish
-      - https://eternalcalendar.canadia.co.nz/
+          - ~~Publish~~
+      - ~~https://eternalcalendar.canadia.co.nz/~~
           - ~~Image~~
-          - itch.io embed
-          - Link to itch.io
-          - Google Play Store links
-          - Apple App Store links
+          - ~~itch.io embed~~
+          - ~~Link to itch.io~~
+          - ~~Google Play Store links~~
+          - ~~Apple App Store links~~
           - ~~Description~~
           - ~~Credits~~
           - ~~Privacy policy~~
-          
-  + Announcement post
-      - canadia.co.nz/posts
-      - Patreon
-      - Ko-fi
-      - itch.io
-      - Twitter          
-      
-## Done
       
   + ~~Release build~~
       - ~~Bump version~~
