@@ -1,13 +1,15 @@
 # todo.md
-          
-  + Announcement post
-      - ~~canadia.co.nz/posts~~
-      - Patreon
-      - Ko-fi
-      - ~~itch.io~~
-      - Twitter          
-      
+
+  + All done!
+	  
 ## Done
+          
+  + ~~Announcement post~~
+      - ~~canadia.co.nz/posts~~
+      - ~~Patreon~~
+      - ~~Ko-fi~~
+      - ~~itch.io~~
+      - ~~Twitter~~
       
   + ~~Upload to stores~~
       - ~~itch.io~~
