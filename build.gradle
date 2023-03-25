@@ -20,7 +20,7 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
 
-    version = '2021.05.14'
+    version = '2023.03.25'
     ext {
         appName = "Eternal Calendar"
         gdxVersion = '1.11.0'

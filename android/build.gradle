@@ -20,8 +20,8 @@ android {
         applicationId "nz.co.canadia.eternalcalendar"
         minSdkVersion 14
         targetSdkVersion 32
-        versionCode 4
-        versionName "2021.05.14"
+        versionCode 5
+        versionName "2023.03.25"
     }
     buildTypes {
         release {
